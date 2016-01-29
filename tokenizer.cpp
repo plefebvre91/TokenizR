@@ -47,7 +47,10 @@ void tokenizer::_tokenize(std::string& str, char separator)
 
 
 int main(int argc, char** argv){
-  tkr::tokenizer t("Hello World", ' ');
+  (void) argc;
+  (void) argv;
+
+  tkr::tokenizer t("Hello    World", ' ');
 
   while(t.has_more_token()){
     std::cout << "token : " << std::endl;
