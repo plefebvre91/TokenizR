@@ -1,1 +1,3 @@
 # TokenizR
+
+Tokenization C++ library
