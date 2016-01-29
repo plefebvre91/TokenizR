@@ -40,10 +40,9 @@ bool tokenizer::has_more_token() const
 }
 
 
-std::string tokenizer::next_token()
+const std::string& tokenizer::next_token()
 {
   std::vector<std::string>::const_iterator old_it = _it++;
-
   return *old_it;
 }
 

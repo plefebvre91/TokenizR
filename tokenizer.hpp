@@ -55,7 +55,7 @@ namespace tkr
     /**
      * \return the next token found in given string
      */
-    std::string next_token();
+    const std::string& next_token();
     
   private:
     void _tokenize(const char*, char);
