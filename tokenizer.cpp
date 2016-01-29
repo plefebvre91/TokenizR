@@ -6,22 +6,14 @@
 
 using namespace tkr;
 
-tokenizer::tokenizer()
-{
-  //...
-}
-
-tokenizer::tokenizer(const tokenizer& t)
-{
-  //...
-}
-
-tokenizer::tokenizer(std::string& str, char separator)
+tokenizer::tokenizer(std::string& str, char separator):
+  _tokens()
 {
   _tokenize(str, separator);
 }
 
-tokenizer::tokenizer(const char* str, char separator)
+tokenizer::tokenizer(const char* str, char separator):
+  _tokens()
 {
   std::string s = str;
   _tokenize(s, separator);
@@ -30,12 +22,14 @@ tokenizer::tokenizer(const char* str, char separator)
 
 bool tokenizer::has_more_token() const
 {
-  return true;
+  return (_it != _tokens.end());
 }
 
-std::string& tokenizer::next_tokens() const
+std::string tokenizer::next_token()
 {
-  
+  std::vector<std::string>::const_iterator old_it = _it;
+  ++_it;
+  return *old_it;
 }
 
 
@@ -46,12 +40,18 @@ void tokenizer::_tokenize(std::string& str, char separator)
   while(std::getline(ss, s, separator))
     {
       _tokens.push_back(s);
-      std::cout << s << std::endl;
+      //   std::cout << s << std::endl;
     }
+  _it = _tokens.begin();
 }
 
 
 int main(int argc, char** argv){
-  tkr::tokenizer("Hello World", ' ');
+  tkr::tokenizer t("Hello World", ' ');
+
+  while(t.has_more_token()){
+    std::cout << "token : " << std::endl;
+    std::cout << t.next_token() << std::endl;
+  }
   return 0;
 }

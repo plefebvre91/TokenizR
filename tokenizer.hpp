@@ -14,16 +14,6 @@ namespace tkr
   public:
     /**
      * Constructor
-     */
-    tokenizer();
-
-    /**
-     * Copy constructor
-     */
-    tokenizer(const tokenizer& t);
-
-    /**
-     * Constructor
      * \param String to tokenize
      * \param Token separator (blank by default)
      */
@@ -44,7 +34,7 @@ namespace tkr
     /**
      * \return the next token found in given string
      */
-    std::string& next_tokens() const;
+    std::string next_token();
     
   private:
     void _tokenize(const char* str, char separator = TKR_DEFAULT_SEPARATOR);
@@ -52,7 +42,7 @@ namespace tkr
 
     // Vector containing all tokens
     std::vector<std::string> _tokens;
-
+    std::vector<std::string>::const_iterator _it;
   };
 }
 
