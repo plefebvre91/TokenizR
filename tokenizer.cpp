@@ -25,6 +25,7 @@ tokenizer::tokenizer(std::string& str, char separator):
   _tokenize(str, separator);
 }
 
+
 tokenizer::tokenizer(const char* str, char separator):
   _tokens()
 {
@@ -35,13 +36,14 @@ tokenizer::tokenizer(const char* str, char separator):
 
 bool tokenizer::has_more_token() const
 {
-  return (_it != _tokens.end());
+  return _it != _tokens.end();
 }
+
 
 std::string tokenizer::next_token()
 {
-  std::vector<std::string>::const_iterator old_it = _it;
-  ++_it;
+  std::vector<std::string>::const_iterator old_it = _it++;
+
   return *old_it;
 }
 
@@ -49,18 +51,21 @@ std::string tokenizer::next_token()
 void tokenizer::_tokenize(std::string& str, char separator)
 {
 
-  std::string s;
+  std::string token;
   
-  // voir si on veut modifier la chaine ou non
+  // Temporary string for character removing
+  std::string tmp(str);
   
-  str.erase(std::unique(str.begin(), str.end()), str.end());
+  // Remove consecutive 'separator' character (on tmp string)
+  tmp.erase(std::unique(tmp.begin(), tmp.end(), [separator](char a, char b){ return a == separator && b == separator;}), tmp.end());
+  
+  std::stringstream ss(tmp);
 
-  std::stringstream ss(str);
-
-  while(std::getline(ss, s, separator))
+  // Add token in vector
+  while(std::getline(ss, token, separator))
     {
-      _tokens.push_back(s);
+      _tokens.push_back(token);
     }
-
+  
   _it = _tokens.begin();
 }

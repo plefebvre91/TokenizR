@@ -23,6 +23,7 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <memory>
 
 #define TKR_DEFAULT_SEPARATOR ' '
 
@@ -57,8 +58,8 @@ namespace tkr
     std::string next_token();
     
   private:
-    void _tokenize(const char* str, char separator = TKR_DEFAULT_SEPARATOR);
-    void _tokenize(std::string& str, char separator = TKR_DEFAULT_SEPARATOR);
+    void _tokenize(const char*, char);
+    void _tokenize(std::string&, char);
 
     // Vector containing all tokens
     std::vector<std::string> _tokens;
