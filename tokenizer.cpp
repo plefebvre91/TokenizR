@@ -1,7 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <sstream>
-
 #include "tokenizer.hpp"
 
 using namespace tkr;
@@ -35,26 +31,19 @@ std::string tokenizer::next_token()
 
 void tokenizer::_tokenize(std::string& str, char separator)
 {
-  std::stringstream ss(str);
+
   std::string s;
+  
+  // voir si on veut modifier la chaine ou non
+  
+  str.erase(std::unique(str.begin(), str.end()), str.end());
+
+  std::stringstream ss(str);
+
   while(std::getline(ss, s, separator))
     {
       _tokens.push_back(s);
-      //   std::cout << s << std::endl;
     }
+
   _it = _tokens.begin();
-}
-
-
-int main(int argc, char** argv){
-  (void) argc;
-  (void) argv;
-
-  tkr::tokenizer t("Hello    World", ' ');
-
-  while(t.has_more_token()){
-    std::cout << "token : " << std::endl;
-    std::cout << t.next_token() << std::endl;
-  }
-  return 0;
 }

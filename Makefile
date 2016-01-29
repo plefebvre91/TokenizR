@@ -3,7 +3,7 @@ CFLAGS=-Wall -Wextra
 
 all: tokenizer
 
-tokenizer: tokenizer.cpp
+tokenizer: main.cpp tokenizer.cpp
 	$(CC) $(CFLAGS) $^ -o $@
 
 clean:

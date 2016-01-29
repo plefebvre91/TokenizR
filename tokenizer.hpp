@@ -4,8 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 #define TKR_DEFAULT_SEPARATOR ' '
+
 
 namespace tkr
 {
