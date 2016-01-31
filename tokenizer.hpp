@@ -63,6 +63,8 @@ namespace tkr
 
     // Vector containing all tokens
     std::vector<std::string> _tokens;
+    
+    // Iterator pointing on next token
     std::vector<std::string>::const_iterator _it;
   };
 }
