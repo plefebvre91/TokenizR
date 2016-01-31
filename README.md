@@ -1,10 +1,11 @@
 # TokenizR
 
-Tokenization C++ library
+String tokenization C++ library
 
 ## Usage
 
 ```c++
+#include <iostream>
 #include "tokenizer.hpp"
 
 int main(int argc, char** argv) {
