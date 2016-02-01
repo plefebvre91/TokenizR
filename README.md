@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 ```
 ### Compilation
 ```
-gcc code.cpp -o my_tkr -lkr
+gcc code.cpp -o my_tkr -ltkr
 ```
   
 ### Output
