@@ -2,7 +2,9 @@
 
 String tokenization C++ library
 
-## Usage
+## Example
+
+### Code
 
 ```c++
 #include <iostream>
@@ -21,9 +23,12 @@ int main(int argc, char** argv) {
   return 0;
 }
 ```
-
+### Compilation
+```
+gcc code.cpp -o my_tkr -lkr
+```
   
-Output :
+### Output
 ```
 Hello
 World
