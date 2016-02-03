@@ -34,11 +34,18 @@ tokenizer::tokenizer(const char* str, char separator):
 }
 
 
-bool tokenizer::has_more_token() const
+bool tokenizer::has_more_tokens() const
 {
   // No more token if iterator is 
   // at the end of tokens vector
-  return _it != _tokens.end();
+  //  if(!_tokens.empty())
+  //    {
+      return _it != _tokens.end();
+  //   }
+  // else
+  //   {
+  //     return false;
+  //   }
 }
 
 
@@ -61,24 +68,24 @@ void tokenizer::_tokenize(std::string& str, char separator)
   // Remove consecutive 'separator' character (on tmp string)
   tmp.erase(std::unique(tmp.begin(), tmp.end(), [separator](char a, char b){ return a == separator && b == separator;}), tmp.end());
 
-  //  std::string token;
-  //  std::stringstream ss(tmp);
+   std::string token;
+   std::stringstream ss(tmp);
 
-  // Add token in vector
-  //  while(std::getline(ss, token, separator))
-  //    {
-  //      _tokens.push_back(token);
-  //    }
+   //Add token in vector
+   while(std::getline(ss, token, separator))
+     {
+       _tokens.push_back(token);
+     }
   
-  size_t start = 0;
-  size_t pos = 0;
-  size_t ret = 0;
+  // size_t start = 0;
+  // size_t pos = 0;
+  // size_t ret = 0;
 
-  while((ret = tmp.find_first_of(separator, pos)) != std::string::npos) {
-    pos += ret;
-    _tokens.push_back(tmp.substr(start, pos));
-    start += (ret+1);
-  }
+  // while((ret = tmp.find_first_of(separator, pos)) != std::string::npos) {
+  //   pos += ret;
+  //   _tokens.push_back(tmp.substr(start, pos));
+  //   start += (ret+1);
+  // }
 
   _it = _tokens.begin();
 }

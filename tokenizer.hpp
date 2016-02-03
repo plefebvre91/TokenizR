@@ -50,7 +50,7 @@ namespace tkr
     /**
      * \return false when all tokens have been read
      */
-    bool has_more_token() const;
+    bool has_more_tokens() const;
 
     /**
      * \return the next token found in given string
