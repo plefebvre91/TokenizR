@@ -17,13 +17,6 @@
 
 #include "tokenizer.hpp"
 
-
-#ifdef TKR_DEBUG
-#define PRINT_DEBUG(x) std::cout<<"debug:"<<(x)<<std::endl;
-#else
-#define  PRINT_DEBUG(x)
-#endif
-
 using namespace tkr;
 
 tokenizer::tokenizer(std::string& str, char separator):
@@ -45,22 +38,13 @@ bool tokenizer::has_more_tokens() const
 {
   // No more token if iterator is 
   // at the end of tokens vector
-  //  if(!_tokens.empty())
-  //    {
-      return _it != _tokens.end();
-  //   }
-  // else
-  //   {
-  //     return false;
-  //   }
+  return _it != _tokens.end();
 }
 
 
 const std::string& tokenizer::next_token()
 {
-  
-  // Update iterator and 
-  // save old iterator position
+  // Update iterator and save old iterator position
   std::vector<std::string>::const_iterator old_it = _it++;
   
   return *old_it;
@@ -75,10 +59,8 @@ void tokenizer::_tokenize(std::string& str, char separator)
   // Remove consecutive 'separator' character (on tmp string)
   tmp.erase(std::unique(tmp.begin(), tmp.end(), [separator](char a, char b){ return a == separator && b == separator;}), tmp.end());
 
-
-  
-  //retirer espace debut / fin 
-  //  tmp = std::regex_replace(tmp, std::regex("^ +| +$|( ) +"), "$1");
+  // Remove separator at beginning and end of string
+  // !!!!!
   const auto str_begin = tmp.find_first_not_of(separator);
   if (str_begin == std::string::npos)
     return; // no content
@@ -87,7 +69,7 @@ void tokenizer::_tokenize(std::string& str, char separator)
   const auto str_range = str_end - str_begin + 1;
 
   tmp = tmp.substr(str_begin, str_range);
-  
+  // !!!!!!!!!
   
   
   //  tmp = std::regex_replace(tmp, std::regex("^ +"), "");
@@ -99,6 +81,8 @@ void tokenizer::_tokenize(std::string& str, char separator)
     {
       _tokens.push_back(token);
     }
+
+  // Alternative
   //  size_t start = 0;
   //  size_t pos = 0;
   //  size_t ret = 0;
@@ -108,6 +92,5 @@ void tokenizer::_tokenize(std::string& str, char separator)
   //   _tokens.push_back(tmp.substr(start, pos));
   //   start += (ret+1);
   // }
-
   _it = _tokens.begin();
 }
