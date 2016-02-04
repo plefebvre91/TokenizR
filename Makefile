@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -Wextra -std=c++11 -g -static-libstdc++
+CXXFLAGS=-Wall -Wextra -std=c++11 -O3 -static-libstdc++
 
 all: lib tokenizer
 

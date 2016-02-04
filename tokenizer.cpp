@@ -17,6 +17,13 @@
 
 #include "tokenizer.hpp"
 
+
+#ifdef TKR_DEBUG
+#define PRINT_DEBUG(x) std::cout<<"debug:"<<(x)<<std::endl;
+#else
+#define  PRINT_DEBUG(x)
+#endif
+
 using namespace tkr;
 
 tokenizer::tokenizer(std::string& str, char separator):
@@ -90,10 +97,7 @@ void tokenizer::_tokenize(std::string& str, char separator)
   //Add token in vector
   while(std::getline(ss, token, separator))
     {
-      //      if(token.back() == '\n'){
-      //	token.back() = (char)'\0';
-	_tokens.push_back(token);
-      
+      _tokens.push_back(token);
     }
   //  size_t start = 0;
   //  size_t pos = 0;
