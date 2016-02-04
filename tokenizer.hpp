@@ -24,6 +24,7 @@
 #include <sstream>
 #include <algorithm>
 #include <memory>
+#include <regex>
 
 #define TKR_DEFAULT_SEPARATOR ' '
 

@@ -68,19 +68,37 @@ void tokenizer::_tokenize(std::string& str, char separator)
   // Remove consecutive 'separator' character (on tmp string)
   tmp.erase(std::unique(tmp.begin(), tmp.end(), [separator](char a, char b){ return a == separator && b == separator;}), tmp.end());
 
-   std::string token;
-   std::stringstream ss(tmp);
 
-   //Add token in vector
-   while(std::getline(ss, token, separator))
-     {
-       _tokens.push_back(token);
-     }
   
-  // size_t start = 0;
-  // size_t pos = 0;
-  // size_t ret = 0;
+  //retirer espace debut / fin 
+  //  tmp = std::regex_replace(tmp, std::regex("^ +| +$|( ) +"), "$1");
+  const auto str_begin = tmp.find_first_not_of(separator);
+  if (str_begin == std::string::npos)
+    return; // no content
 
+  const auto str_end = tmp.find_last_not_of(separator);
+  const auto str_range = str_end - str_begin + 1;
+
+  tmp = tmp.substr(str_begin, str_range);
+  
+  
+  //  tmp = std::regex_replace(tmp, std::regex("^ +"), "");
+  std::string token;
+  std::stringstream ss(tmp);
+  
+  //Add token in vector
+  while(std::getline(ss, token, separator))
+    {
+      #ifdef TKR_DEBUG
+      std::cout << ":" << token << ":" << std::endl;
+      #endif
+      _tokens.push_back(token);
+    }
+  
+  //  size_t start = 0;
+  //  size_t pos = 0;
+  //  size_t ret = 0;
+  
   // while((ret = tmp.find_first_of(separator, pos)) != std::string::npos) {
   //   pos += ret;
   //   _tokens.push_back(tmp.substr(start, pos));

@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -Wextra -std=c++11 -g
+CXXFLAGS=-Wall -Wextra -std=c++11 -g -static-libstdc++
 
 test: ../tokenizer.cpp test.cpp
 	$(CXX) $(CXXFLAGS) $^ -o $@
