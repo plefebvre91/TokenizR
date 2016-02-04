@@ -82,6 +82,7 @@ void tokenizer::_tokenize(std::string& str, char separator)
   tmp = tmp.substr(str_begin, str_range);
   
   
+  
   //  tmp = std::regex_replace(tmp, std::regex("^ +"), "");
   std::string token;
   std::stringstream ss(tmp);
@@ -89,12 +90,11 @@ void tokenizer::_tokenize(std::string& str, char separator)
   //Add token in vector
   while(std::getline(ss, token, separator))
     {
-      #ifdef TKR_DEBUG
-      std::cout << ":" << token << ":" << std::endl;
-      #endif
-      _tokens.push_back(token);
+      //      if(token.back() == '\n'){
+      //	token.back() = (char)'\0';
+	_tokens.push_back(token);
+      
     }
-  
   //  size_t start = 0;
   //  size_t pos = 0;
   //  size_t ret = 0;

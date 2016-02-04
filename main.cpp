@@ -14,9 +14,10 @@ int main(int argc, char** argv){
     {
       read_bytes = read(0, buf, BUF_SIZE);
       tkr::tokenizer t(buf, ' ');
-      while(t.has_more_token()){
+      while(t.has_more_tokens()){
 	std::cout << t.next_token() << std::endl;
       }
+      buf[0] = 0;
     }  
   return 0;
 }
