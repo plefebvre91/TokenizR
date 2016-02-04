@@ -1,16 +1,26 @@
 CXX=g++
 CXXFLAGS=-Wall -Wextra -std=c++11 -O3 -static-libstdc++
 
-all: lib tokenizer
+all: tokenizer libtkr.so lib
+	@echo "Program and libraries have been built successfully!"
 
-tokenizer: main.cpp tokenizer.o
+tokenizer: src/tokenizer.cpp  src/main.cpp
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-tokenizer.o: tokenizer.cpp
-	$(CXX) tokenizer.cpp -c -std=c++11 -Wall -Wextra $^
+tokenizer.o: src/tokenizer.cpp
+	$(CXX) $^ -c $(CXXFLAGS)
 
-lib: tokenizer.o
-	ar rvcs libtkr.a $^
+libtkr.so: src/tokenizer.cpp
+	$(CXX) $(CXXFLAGS) $^ -shared -fPIC -o $@
+
+lib: tokenizer.o libtkr.so
+	@echo "Build static library..."
+	@ar rvcs libtkr.a $^ >/dev/null
+	@rm -rf lib 2>/dev/null
+	@mkdir lib
+	@mv libtkr.so libtkr.a ./lib
+	@cp src/tokenizer.hpp ./lib
 
 clean:
-	rm tokenizer tokenizer.a 2&>/dev/null
+	@rm -rf lib tokenizer *.o 2>/dev/null
+	@echo "Done."
