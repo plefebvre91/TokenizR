@@ -2,9 +2,28 @@
 
 String tokenization C++ library
 
-## Example
+## Examples
 
-### Code
+### As a command
+
+my_file.txt
+```
+Hello World !
+```
+
+```shell
+tokenizer < my_file.txt
+```
+
+#### Output
+```
+Hello
+World
+!
+```
+
+
+### As a library
 
 ```c++
 #include <iostream>
@@ -23,12 +42,12 @@ int main(int argc, char** argv) {
   return 0;
 }
 ```
-### Compilation
+#### Compilation
 ```
 gcc code.cpp -o my_tkr -ltkr
 ```
   
-### Output
+#### Output
 ```
 Hello
 World
