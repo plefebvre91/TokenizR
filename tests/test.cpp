@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../tokenizer.hpp"
+#include "tokenizer.hpp"
 #include <assert.h>
 
 

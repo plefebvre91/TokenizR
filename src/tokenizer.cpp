@@ -57,22 +57,25 @@ void tokenizer::_tokenize(std::string& str, char separator)
   std::string tmp(str);
   
   // Remove consecutive 'separator' character (on tmp string)
-  tmp.erase(std::unique(tmp.begin(), tmp.end(), [separator](char a, char b){ return a == separator && b == separator;}), tmp.end());
+  tmp.erase(std::unique(tmp.begin(),
+			tmp.end(), 
+			[separator](char a, char b){ return a == separator && b == separator;}), 
+	    tmp.end());
 
   // Remove separator at beginning and end of string
-  // !!!!!
   const auto str_begin = tmp.find_first_not_of(separator);
-  if (str_begin == std::string::npos)
-    return; // no content
 
+  // No content
+  if (str_begin == std::string::npos)
+    {
+      return;
+    }
+  
   const auto str_end = tmp.find_last_not_of(separator);
   const auto str_range = str_end - str_begin + 1;
 
   tmp = tmp.substr(str_begin, str_range);
-  // !!!!!!!!!
-  
-  
-  //  tmp = std::regex_replace(tmp, std::regex("^ +"), "");
+    
   std::string token;
   std::stringstream ss(tmp);
   
@@ -81,16 +84,7 @@ void tokenizer::_tokenize(std::string& str, char separator)
     {
       _tokens.push_back(token);
     }
-
-  // Alternative
-  //  size_t start = 0;
-  //  size_t pos = 0;
-  //  size_t ret = 0;
   
-  // while((ret = tmp.find_first_of(separator, pos)) != std::string::npos) {
-  //   pos += ret;
-  //   _tokens.push_back(tmp.substr(start, pos));
-  //   start += (ret+1);
-  // }
+  // Set the iterator on the fist token
   _it = _tokens.begin();
 }

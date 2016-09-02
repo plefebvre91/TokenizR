@@ -1,8 +1,9 @@
 CXX=g++
 CXXFLAGS=-Wall -Wextra -std=c++11 -g -static-libstdc++
+INCFLAG=-I../src/
 
-test: ../tokenizer.cpp test.cpp
-	$(CXX) $(CXXFLAGS) $^ -o $@
+test: ../src/tokenizer.cpp test.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAG) $^ -o $@
 	./run-test.sh
 
 clean:
